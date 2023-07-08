@@ -1,0 +1,54 @@
+using System;
+
+class Program
+{
+    static void Main()
+    {
+        Random random = new Random();
+        int secretNumber = random.Next(1, 101);
+        int attempts = 0;
+
+        Console.WriteLine("Добро пожаловать в игру 'Угадай число'!");
+        Console.WriteLine("Я загадал число от 1 до 100. Попробуйте угадать.");
+
+        while (true)
+        {
+            Console.Write("Введите ваше предположение: ");
+            string input = Console.ReadLine();
+
+            int guess;
+            bool isNumber = int.TryParse(input, out guess);
+
+            if (!isNumber)
+            {
+                Console.WriteLine("Ошибка! Введите корректное число.");
+                continue;
+            }
+
+            attempts++;
+
+            if (guess < secretNumber)
+            {
+                Console.WriteLine("Загаданное число больше.");
+            }
+            else if (guess > secretNumber)
+            {
+                Console.WriteLine("Загаданное число меньше.");
+            }
+            else
+            {
+                Console.WriteLine("Поздравляю! Вы угадали число.");
+                Console.WriteLine($"Количество попыток: {attempts}");
+                break;
+            }
+        }
+
+        Console.WriteLine("Спасибо за игру! Желаете сыграть ещё раз? (Да/Нет)");
+        string playAgain = Console.ReadLine();
+
+        if (playAgain.ToLower() == "да")
+        {
+            Main();
+        }
+    }
+}
